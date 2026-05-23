@@ -1,37 +1,39 @@
 package app.service;
 
-import app.model.Transaction;
-import app.repository.TransactionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import app.model.Parcel;
+import app.repository.ParcelRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ParcelService {
-    @Autowired
-    private ParcelRepository repository;
 
-    public List<Parcel> findAll() {
+    private final ParcelRepository repository;
+
+    public ParcelService(ParcelRepository repository) {
+        this.repository = repository;
+    }
+
+    public List<Parcel> getAll() {
         return repository.findAll();
     }
 
-    public Parcel findById(@PathVariable Integer id) {
-        return repository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Content not found"));
+    public Optional<Parcel> getById(int id) {
+        return repository.findById(id);
     }
 
-    public Parcel save(Transaction transaction){
-        return repository.save(transaction);
+    public Parcel create(Parcel parcel) {
+        return repository.save(parcel);
     }
 
-    public boolean existsById(Integer id) {
-        return repository.existsById(id);
+    public Parcel update(int id, Parcel updated) {
+        updated.setId(id);
+        return repository.save(updated);
     }
 
-    public void delete(@PathVariable Integer id) {
-        repository.delete(findById(id));
+    public void delete(int id) {
+        repository.deleteById(id);
     }
 }
