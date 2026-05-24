@@ -1,7 +1,6 @@
 package app.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,12 +11,22 @@ import java.time.LocalDate;
 @Setter
 public class Parcel {
         @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int id;
-        private String name;
-        private LocalDate CreationTime;
-        private String desc;
+
+        @Enumerated(EnumType.STRING)
+        private Status status;
+
+        private String sender;
+        private String receiver;
+        private String destination;
+
+        @Enumerated(EnumType.STRING)
+        private Size size;
+
+        private LocalDate creationTime;
 
         public Parcel() {
-                this.CreationTime = LocalDate.now();
+                this.creationTime = LocalDate.now();
         }
 }
