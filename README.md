@@ -3,6 +3,7 @@
  # Starting 
  npm start in app directory
 
+ # Endpoints
 GET    /parcels
 
 GET    /parcels/{id}
