@@ -1,5 +1,8 @@
 ﻿# Parcel-Control-System
 
+ # Starting 
+ npm start in app directory
+
 GET    /parcels
 
 GET    /parcels/{id}
